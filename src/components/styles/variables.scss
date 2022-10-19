@@ -1,0 +1,35 @@
+$primary-color: #ffd700;
+$color: #444;
+$background: #023c43;
+
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+$header-height: 4.5rem;
+
+$sm: 576px; // mobile
+$md: 768px; // tablets
+$lg: 992px; // laptop
+$xl: 1220px; //hd
+
+
+@mixin responsive($point) {
+    @if $point ==md {
+        @media (min-width: $md) {
+            @content
+        }
+    }
+
+    @if $point ==lg {
+        @media (min-width: $lg) {
+            @content
+        }
+    }
+
+    @if $point ==xl {
+        @media (min-width: $xl) {
+            @content
+        }
+    }
+}
