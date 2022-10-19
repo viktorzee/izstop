@@ -1,47 +1,68 @@
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCube } from "swiper";
+import Header from "./components/header/Header";
+
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/scss/scrollbar";
 
 import "./App.scss";
-import { useRef } from "react";
-import Header from "./components/header/Header";
 
 const items = [
   {
-    id: 0,
+    id: 1,
     title: "Hosting & Dev",
     text: "We offer you hosting which will not be limited to monthly transfers (actions). We do not allow you to jump on furniture though, only kids are allowed to do that.",
     buttonText: "Discover",
-    vidSrc: "http://izstop.izstop.si/instagram/vid.mp4",
+    vidSrc: "https://www.youtube.com/embed/aEvP2tqaZD4",
+    type: "",
   },
   {
-    id: 1,
+    id: 2,
     title: "Web",
     text: "We are kings of html and all that jazz. In our kingdom we have a few magicians that are doing wonders with codes. We love codes. ",
     buttonText: "Explore",
     vidSrc: "http://izstop.izstop.si/instagram/vid.mp4",
+    type: "video/mp4",
   },
   {
-    id: 2,
+    id: 3,
     title: "Vr",
     text: "VR takes us back when we were as kids watching SciFi movies about virtual reality and we didn’t had a clue that VR is going to be part of our life.",
     buttonText: "Discover",
     vidSrc: " http://izstop.izstop.si/instagram/vid_2.mp4",
+    type: "video/mp4",
   },
   {
-    id: 3,
+    id: 4,
     title: "About us",
-    text: "We challenge convention and push technology to the edge of possibility. Welcome to Rimac. This is our story.",
+    text: "We challenge convention and push technology to the edge of possibility. Welcome to Izstop. Our story tells about our uniqueness.",
     buttonText: "Explore",
     vidSrc: "http://izstop.izstop.si/nobackup/OZEMPIC_final_4.mp4",
+    type: "video/mp4",
   },
 ];
 
 export default function App() {
   const swiperRef = useRef();
-  console.log(swiperRef, "first");
+  console.log(swiperRef);
+
+  //add as blob
+  async function fetchVideo() {
+    await items.map(({ id, vidSrc }) => {
+      const videoSrc = fetch(`${vidSrc}`)
+        .then((res) => {
+          return res.blob();
+        })
+        .then((blob) => {
+          let obj = URL.createObjectURL(blob);
+          document.querySelector("video").src = blobUrl;
+          console.log(blobUrl);
+        });
+      return videoSrc;
+    });
+  }
   return (
     <div className="App">
       <Header />
@@ -60,10 +81,18 @@ export default function App() {
         pagination={true}
         modules={[EffectCube]}
       >
-        {items.map(({ id, title, text, buttonText, vidSrc }) => (
+        {items.map(({ id, title, text, buttonText, vidSrc, type }) => (
           <SwiperSlide key={id}>
-            <video autoPlay loop muted id="video">
-              <source src={vidSrc} type="video/mp4" />
+            <video autoPlay loop muted className="video">
+              {type === "video/mp4" ? (
+                <source src={vidSrc} type={type} />
+              ) : (
+                <iframe
+                  src={vidSrc}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                />
+              )}
             </video>
             <h2>{title}</h2>
             <p>{text}</p>
@@ -74,31 +103,34 @@ export default function App() {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
 
-      <div className="navigation">
-        <ul>
-          {items.map(({ id, title }) => {
-            console.log(swiperRef, "scond");
-            console.log(id);
-            return (
-              <li
-                key={id}
-                onClick={() => {
-                  swiperRef.current.slideTo(id);
-                }}
-                className={`${swiperRef.activeIndex === id ? "active" : ""}`}
-              >
-                <p>{title}</p>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <i className="scroll-indicator"></i>
-      <div className="section-scroll">
-        <span className="hscroll-line"></span>
-      </div>
+        <div className="navigation">
+          <i className="moving-bar opacity-100">
+            <span className="rect"></span>
+            <span className="circle"></span>
+          </i>
+          <ul>
+            {items.map(({ id, title }) => {
+              console.log(id);
+              console.log(swiperRef.current, "current");
+              return (
+                <li
+                  key={id}
+                  onClick={() => {
+                    swiperRef.current.slideTo(id);
+                  }}
+                >
+                  <p>{title}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div class="c-scrolldown">
+          <div class="c-line"></div>
+        </div>
+      </Swiper>
     </div>
   );
 }
