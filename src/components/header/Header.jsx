@@ -160,6 +160,9 @@ export default function Header() {
       <NavBackground clicked={click}>&nbsp;</NavBackground>
 
       <Navigation clicked={click}>
+        <a href="/" className="logo-link">
+          <img src={izstop_logo} alt="logo" className="img-logo" />
+        </a>
         <List>{menuList}</List>
       </Navigation>
     </>

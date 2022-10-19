@@ -103,7 +103,6 @@ export default function App() {
             </div>
           </SwiperSlide>
         ))}
-
         <div className="navigation">
           <i className="moving-bar opacity-100">
             <span className="rect"></span>
