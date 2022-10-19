@@ -4,6 +4,7 @@
   height: 100%;
   width: 100%;
   position: relative;
+  // background: url("https://swiperjs.com/demos/images/nature-1.jpg");
 
   .navigation {
     position: absolute;
@@ -257,7 +258,7 @@
     position: absolute;
     bottom: 16%;
     @include responsive(md){
-      bottom: 100px;
+      bottom: 6%;
       left: 0;
       height: $line-height;
     }

@@ -12,7 +12,10 @@ const COLORS = {
 const MenuLabel = styled.label`
   top: -14px;
   position: absolute;
-  right: 0rem;
+  @media (min-width: 765px) {
+    left: 85rem;
+  }
+  left: 20rem;
   width: 7rem;
   cursor: pointer;
   z-index: 1000;
@@ -121,16 +124,28 @@ const ItemLink = styled.a`
 const FlexMenu = styled.section`
   display: flex;
   justify-content: space-between;
-  background: ;
+  background: transparent;
+  position: absolute;
 `;
 
-const menu = ["Hosting and Dev", "Web", "Vr", "About us"];
+const menu = [
+  { id: 0, val: "Hosting and Dev" },
+  { id: 1, val: "Web" },
+  { id: 2, val: "VR" },
+  { id: 3, val: "About us" },
+];
 
 export default function Header() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
-  // const menuList = menu.map(({val, id}) =>)
+  const menuList = menu.map(({ id, val }) => (
+    <li key={id}>
+      <ItemLink onClick={handleClick} to="#">
+        {val}
+      </ItemLink>
+    </li>
+  ));
 
   return (
     <>
@@ -145,28 +160,7 @@ export default function Header() {
       <NavBackground clicked={click}>&nbsp;</NavBackground>
 
       <Navigation clicked={click}>
-        <List>
-          <li>
-            <ItemLink onClick={handleClick} to="#">
-              Hosting & Dev
-            </ItemLink>
-          </li>
-          <li>
-            <ItemLink onClick={handleClick} to="#">
-              Web
-            </ItemLink>
-          </li>
-          <li>
-            <ItemLink onClick={handleClick} to="#">
-              VR
-            </ItemLink>
-          </li>
-          <li>
-            <ItemLink onClick={handleClick} to="#">
-              About Us
-            </ItemLink>
-          </li>
-        </List>
+        <List>{menuList}</List>
       </Navigation>
     </>
   );
