@@ -1,5 +1,19 @@
 @import './components/styles/variables.scss';
 
+
+
+@media (min-aspect-ratio: 16/9) {
+  :root {
+    --video-height: 56.25vw;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  :root {
+    --video-width: 177.78vh;
+  }
+}
+
 .App {
   height: 100%;
   width: 100%;
@@ -8,7 +22,7 @@
 
   .navigation {
     position: absolute;
-    top: 63%;
+    top: 70%;
     left: 1%;
     padding-left: 1.5rem;
     @include responsive(md) {
@@ -55,8 +69,6 @@
       
       &:active{
         opacity: 1;
-        font-weight: 700;
-        text-transform: lowercase;
       }
 
       &:hover {
@@ -69,7 +81,10 @@
       
   }
 
- 
+  .yt {
+    height: 100vh;
+  }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -86,7 +101,6 @@
       background-size: cover;
       text-align: center;
       position: relative;
-
 
       h2 {
           text-transform: uppercase;
@@ -278,7 +292,7 @@
     width: 2px;
     height: 20%;
     position: absolute;
-    bottom: 16%;
+    bottom: 9%;
     @include responsive(md){
       bottom: 6%;
       left: 0;
@@ -341,8 +355,12 @@
 
 
 .video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: -1;
-  width: 100%;
 }
 

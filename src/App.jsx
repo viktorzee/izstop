@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCube } from "swiper";
 import Header from "./components/header/Header";
+import YoutubeBackground from "react-youtube-background";
 
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -9,14 +10,17 @@ import "swiper/scss/scrollbar";
 
 import "./App.scss";
 
+const VIDEO_WIDTH = 1920;
+const VIDEO_HEIGHT = 1080;
 const items = [
   {
     id: 1,
     title: "Hosting & Dev",
     text: "We offer you hosting which will not be limited to monthly transfers (actions). We do not allow you to jump on furniture though, only kids are allowed to do that.",
     buttonText: "Discover",
-    vidSrc: "https://www.youtube.com/embed/aEvP2tqaZD4",
-    type: "",
+    vidSrc: "http://izstop.izstop.si/instagram/vid.mp4",
+    // "https://www.youtube.com/embed/aEvP2tqaZD4?controls=0&showninfo=0&autoplay=1&mute=1",
+    type: "video/mp4",
   },
   {
     id: 2,
@@ -83,17 +87,15 @@ export default function App() {
       >
         {items.map(({ id, title, text, buttonText, vidSrc, type }) => (
           <SwiperSlide key={id}>
-            <video autoPlay loop muted className="video">
-              {type === "video/mp4" ? (
+            {type === "video/mp4" ? (
+              <video autoPlay loop muted className="video">
                 <source src={vidSrc} type={type} />
-              ) : (
-                <iframe
-                  src={vidSrc}
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                />
-              )}
-            </video>
+              </video>
+            ) : (
+              <YoutubeBackground className="yt" videoId={vidSrc}>
+                <div style={{ height: 500 }}>Content</div>
+              </YoutubeBackground>
+            )}
             <h2>{title}</h2>
             <p>{text}</p>
             <div className="btn__wrapper btn__wrapper-dark">
@@ -109,20 +111,16 @@ export default function App() {
             <span className="circle"></span>
           </i>
           <ul>
-            {items.map(({ id, title }) => {
-              console.log(id);
-              console.log(swiperRef.current, "current");
-              return (
-                <li
-                  key={id}
-                  onClick={() => {
-                    swiperRef.current.slideTo(id);
-                  }}
-                >
-                  <p>{title}</p>
-                </li>
-              );
-            })}
+            {items.map(({ id, title }) => (
+              <li
+                key={id}
+                onClick={() => {
+                  swiperRef.current.slideTo(id);
+                }}
+              >
+                <p>{title}</p>
+              </li>
+            ))}
           </ul>
         </div>
 
