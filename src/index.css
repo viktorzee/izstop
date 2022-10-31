@@ -7,11 +7,20 @@ body,
   height: 100vh;
   width: 100vw;
   font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  background: #129f96;
+  padding: 0;
+  margin: 0;
+  color: black;
   overflow: hidden;
 }
-
+/*
 h1,
 h2,
 h3,
@@ -21,4 +30,22 @@ p,
 li,
 span {
   color: white;
+} */
+
+#app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
 }
