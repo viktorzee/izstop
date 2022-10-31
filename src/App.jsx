@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import Header from "./components/header/Header";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { VideoObserver } from "./components/VideoObserver";
 
 import "swiper/scss";
 // import "swiper/css";
+import "swiper/scss/pagination";
 import "swiper/scss/navigation";
-import "swiper/scss/mousewheel";
 import "swiper/scss/effect-coverflow";
 
 import "./App.scss";
@@ -19,10 +20,7 @@ import {
   EffectCoverflow,
   Mousewheel,
 } from "swiper";
-import { VideoObserver } from "./components/IntersectionObserver";
 
-const VIDEO_WIDTH = 1920;
-const VIDEO_HEIGHT = 1080;
 const items = [
   {
     id: 1,
@@ -59,36 +57,6 @@ const items = [
   },
 ];
 
-const sampleItems = [
-  {
-    id: 1,
-    title: "Hosting & Dev",
-    text: "We offer you hosting which will not be limited to monthly transfers (actions). We do not allow you to jump on furniture though, only kids are allowed to do that.",
-    buttonText: "Discover",
-    imgSrc: "https://swiperjs.com/demos/images/nature-1.jpg",
-  },
-  {
-    id: 2,
-    title: "Web",
-    text: "We are kings of html and all that jazz. In our kingdom we have a few magicians that are doing wonders with codes. We love codes. ",
-    buttonText: "Explore",
-    imgSrc: "https://swiperjs.com/demos/images/nature-2.jpg",
-  },
-  {
-    id: 3,
-    title: "Vr",
-    text: "VR takes us back when we were as kids watching SciFi movies about virtual reality and we didn’t had a clue that VR is going to be part of our life.",
-    buttonText: "Discover",
-    imgSrc: " https://swiperjs.com/demos/images/nature-3.jpg",
-  },
-  {
-    id: 4,
-    title: "About us",
-    text: "We challenge convention and push technology to the edge of possibility. Welcome to Rimac. This is our story.",
-    buttonText: "Explore",
-    imgSrc: "https://swiperjs.com/demos/images/nature-4.jpg",
-  },
-];
 export default function App() {
   const swiperRef = useRef();
   let interleaveOffset = 2 * Math.PI;
@@ -121,6 +89,14 @@ export default function App() {
         slidesPerView={1}
         spaceBetween={30}
         speed={900}
+        effect="coverflow"
+        coverflow={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
         mousewheel={{
           sensitivity: 1.5,
           enabled: true,
@@ -149,14 +125,6 @@ export default function App() {
         navigation={true}
         onProgress={(swiper, progress) => {
           for (let i = 0; i < swiper.slides.length; i++) {
-            // progress = swiper.slides[i].progress;
-            // console.log(progress);
-            // let innerOffset = swiper.width * interleaveOffset;
-            // let innerTranslate = progress * innerOffset;
-            // swiper.slides[i].querySelector(".slide_inner").style.transform = `
-            //     scale(0.6 0.7);
-            //     translate3d(0, ${innerTranslate}px, 0)
-            // `;
             let slide = swiper.slides[i];
             let translate, innerTranslate;
             progress = slide.progress;
@@ -184,12 +152,6 @@ export default function App() {
             swiper.slides[i].style.transition = "";
           }
         }}
-        // onTransitionStart={(swiper) => {
-        //   for (let i = 0; i < swiper.slides.length; i++) {
-        //     const slide = swiper.slides[i];
-        //     slide.querySelector(".slide_inner").style.scale = ``;
-        //   }
-        // }}
         onTransitionEnd={(swiper) => {
           for (let i = 0; i < swiper.slides.length; i++) {
             const slide = swiper.slides[i];
@@ -221,14 +183,13 @@ export default function App() {
           Keyboard,
           Scrollbar,
           Navigation,
+          Mousewheel,
           Zoom,
           EffectCoverflow,
-          Mousewheel,
         ]}
       >
         {items.map(({ id, title, text, buttonText, vidSrc, type }) => (
           <SwiperSlide key={id}>
-            {/*  <img src={imgSrc} alt={title} className="slide_inner" />*/}
             <VideoObserver
               type={type}
               src={vidSrc}
