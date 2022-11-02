@@ -4,6 +4,6 @@
 
 In your Terminal:
 
-$ cd izstop
-$ yarn -> run dependencies
-$ yarn run dev -> start project
+$ cd izstop;
+$ yarn -> run dependencies;
+$ yarn run dev -> start project;
