@@ -120,6 +120,7 @@ const FlexMenu = styled.section`
   justify-content: space-between;
   background: transparent;
   position: absolute;
+  width: 100%;
 `;
 
 const menu = [
