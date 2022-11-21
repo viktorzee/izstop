@@ -59,7 +59,7 @@ const items = [
 
 export default function App() {
   const swiperRef = useRef();
-  let interleaveOffset = 2 * Math.PI;
+  let interleaveOffset = 0.5 * Math.PI;
   console.log(swiperRef);
 
   //add as blob

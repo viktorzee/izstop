@@ -10,12 +10,6 @@ const COLORS = {
 };
 
 const MenuLabel = styled.label`
-  top: -14px;
-  position: absolute;
-  @media (min-width: 765px) {
-    left: 85rem;
-  }
-  left: 20rem;
   width: 7rem;
   cursor: pointer;
   z-index: 1000;
@@ -47,7 +41,7 @@ const Icon = styled.span`
   width: 3rem;
   height: 2px;
   display: inline-block;
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
   transition: all 0.3s;
   &::before,
   &::after {
